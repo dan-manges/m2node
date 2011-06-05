@@ -4,7 +4,8 @@ task :default => %w[compile test]
 
 desc "compile coffee to js"
 task :compile do
-  sh "coffee -c examples lib"
+  sh "coffee -o lib/ -c src/"
+  sh "coffee -c examples"
 end
 
 desc "run the tests"
