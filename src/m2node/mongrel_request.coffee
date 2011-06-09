@@ -8,7 +8,7 @@ class MongrelRequest
 
   toFullHttpRequest: ->
     request = []
-    request.push @headers.METHOD + ' ' + @path + ' HTTP/1.1\r\n'
+    request.push @headers.METHOD + ' ' + @headers.URI + ' HTTP/1.1\r\n'
     for k, v of @headers
       request.push "#{k}: #{v}\r\n"
     request.push "\r\n"

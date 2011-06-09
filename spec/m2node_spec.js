@@ -109,6 +109,32 @@ vows.describe('m2node').addBatch({
       assert.equal(response.status, '200');
       assert.equal(response.body.toString(), 'foo=bar&body_echoed=true');
     }
-  }
+  },
+
+  'request url': {
+    topic: function () {
+      var callback = this.callback;
+      var req = http.request({
+        host: 'localhost',
+        port: 9000,
+        method: 'GET',
+        path: '/echo_request_url?a=b&c=d'
+      }, function (response) {
+        response.on('data', function (chunk) {
+          callback(null, {
+            status: response.statusCode,
+            headers: response.headers,
+            body: chunk
+          })
+        });
+      });
+      req.end();
+    },
+
+    'it contains the query string': function (err, response) {
+      assert.equal(response.status, '200');
+      assert.equal(response.body.toString(), '/echo_request_url?a=b&c=d');
+    }
+  },
 }).export(module)
 

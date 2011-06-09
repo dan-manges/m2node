@@ -3,29 +3,31 @@ m2node = require '../lib/m2node'
 
 server = http.createServer((req, res) ->
   console.log("#{req.method} #{req.url}")
-  switch req.url
-    when '/'
-      res.writeHead(200, {'Content-Type': 'text/plain'})
-      res.end('Hello World\n')
-    when '/echo_headers'
-      res.writeHead(200, {'Content-Type': 'text/plain'})
-      res.end(JSON.stringify(req.headers))
-    when '/set_response_header'
+  if req.url == '/'
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end('Hello World\n')
+  else if req.url.match /echo_request_url/
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end(req.url)
+  else if req.url == '/echo_headers'
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end(JSON.stringify(req.headers))
+  else if req.url == '/set_response_header'
+    res.statusCode = 200
+    res.setHeader('X-CustomResponseHeader', 'm2node')
+    res.end('OK')
+  else if req.url == '/echo_body'
+    body = ''
+    req.on('data', (data) ->
+      body += data
+    )
+    req.on('end', ->
       res.statusCode = 200
-      res.setHeader('X-CustomResponseHeader', 'm2node')
-      res.end('OK')
-    when '/echo_body'
-      body = ''
-      req.on('data', (data) ->
-        body += data
-      )
-      req.on('end', ->
-        res.statusCode = 200
-        res.end(body)
-      )
-    else
-      res.writeHead(404, {})
-      res.end("Could not find page: #{req.url}")
+      res.end(body)
+    )
+  else
+    res.writeHead(404, {})
+    res.end("Could not find page: #{req.url}")
 )
 
 m2node.run(
