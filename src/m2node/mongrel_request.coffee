@@ -9,7 +9,7 @@ class MongrelRequest
   toFullHttpRequest: ->
     request = []
     request.push @headers.METHOD + ' ' + @headers.URI + ' HTTP/1.1\r\n'
-    for k, v of @headers
+    for k, v of @headers when k.match(/^[^A-Z]+$/)
       request.push "#{k}: #{v}\r\n"
     request.push "\r\n"
     request.push @body

@@ -53,6 +53,18 @@ vows.describe('m2node').addBatch({
     'are all passed to the server': function (err, response) {
       assert.equal(response.status, '200');
       assert.equal(JSON.parse(response.body.toString())['x-testing'], 'm2node');
+    },
+
+    'do not include the non-http headers': function (err, response) {
+      assert.equal(response.status, '200');
+      var responseBody = JSON.parse(response.body.toString());
+      var keys = [];
+      for (var key in responseBody) { keys.push(key); }
+      assert.equal(keys.length, 4);
+      assert.include(keys, 'connection');
+      assert.include(keys, 'host');
+      assert.include(keys, 'x-forwarded-for');
+      assert.include(keys, 'x-testing');
     }
   },
 
