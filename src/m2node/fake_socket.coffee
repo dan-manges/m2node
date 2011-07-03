@@ -1,6 +1,6 @@
 sys = require 'sys'
 util = require 'util'
-events = require('events')
+events = require 'events'
 
 class FakeSocket extends events.EventEmitter
   constructor: ->
@@ -19,6 +19,7 @@ class FakeSocket extends events.EventEmitter
   setTimeout: (timeout, callback) -> # noop
 
   write: (data) ->
+    data = new Buffer data.toString()
     combinedBuffer = new Buffer(@writeBuffer.length + data.length)
     @writeBuffer.copy(combinedBuffer)
     combinedBuffer.write(data.toString(), @writeBuffer.length)

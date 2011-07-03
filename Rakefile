@@ -10,7 +10,7 @@ end
 
 desc "run the tests"
 task :test do
-  sh "vows spec/m2node_spec.js"
+  sh("vows " + Dir.glob("spec/*_spec.js").join(" "))
 end
 
 namespace :test do
