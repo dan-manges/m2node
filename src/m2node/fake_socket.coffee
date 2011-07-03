@@ -1,6 +1,6 @@
 sys = require 'sys'
 util = require 'util'
-events = require('events')
+events = require 'events'
 
 class FakeSocket extends events.EventEmitter
   constructor: ->
