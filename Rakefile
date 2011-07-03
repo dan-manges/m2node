@@ -15,6 +15,7 @@ end
 
 namespace :test do
   namespace :app do
+    desc "start test app"
     task :start => :compile do
       sh "coffee spec/app.coffee"
     end
@@ -27,6 +28,7 @@ namespace :test do
       end
     end
 
+    desc "start mongrel2 for tests"
     task :start => :load do
       Dir.chdir(SPEC_DIR) do
         sh "m2sh start -name m2node_tests --db config.sqlite"

@@ -52,4 +52,8 @@ m2node.run(app, {
 });
 ```
 
+contributors
+------------
+
+see package.json
 

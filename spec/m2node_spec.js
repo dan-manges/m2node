@@ -1,6 +1,8 @@
 var vows = require('vows');
 var assert = require('assert');
 var http = require('http');
+var m2node = require('../lib/m2node');
+var sys = require('sys');
 
 vows.describe('m2node').addBatch({
   'smoke test': {
@@ -148,5 +150,23 @@ vows.describe('m2node').addBatch({
       assert.equal(response.body.toString(), '/echo_request_url?a=b&c=d');
     }
   },
+
+  'return value from m2node.run': {
+    topic: function () {
+      server = http.createServer(function (req, res) {
+      });
+      handler = m2node.run(server, {
+        send_spec: 'tcp://127.0.0.1:9991',
+        recv_spec: 'tcp://127.0.0.1:9992'
+      });
+      this.callback(null, handler);
+    },
+    'returns the handler with access to sockets': function (err, handler) {
+      assert.isObject(handler.pullSocket);
+      assert.isObject(handler.pubSocket);
+      handler.pullSocket.close();
+      handler.pubSocket.close();
+    }
+  }
 }).export(module)
 
