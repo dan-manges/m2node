@@ -1,6 +1,6 @@
 {
   "name"                : "m2node",
-  "version"             : "0.1.1",
+  "version"             : "0.1.2",
   "description"         : "mongrel2 handler",
   "keywords"            : ["http", "mongrel2"],
   "homepage"            : "https://github.com/dan-manges/m2node",
