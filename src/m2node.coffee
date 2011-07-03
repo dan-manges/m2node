@@ -11,4 +11,5 @@ exports.run = (server, options) ->
       handler.sendResponse(request, fakeSocket.writeBuffer)
     server.emit 'connection', fakeSocket
     fakeSocket.emitData(request.toFullHttpRequest())
+  handler
 
