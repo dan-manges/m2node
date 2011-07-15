@@ -9,9 +9,12 @@ class Handler extends events.EventEmitter
     @pullSocket.connect(options.recv_spec)
     @pullSocket.on 'message', (message) =>
       @emit 'request', new MongrelRequest(message)
-
+    @pullSocket.on 'error', (e) =>
+      @emit 'error', e
     @pubSocket = zeromq.createSocket('pub')
     @pubSocket.connect(options.send_spec)
+    @pubSocket.on 'error', (e) =>
+      @emit 'error', e
 
   sendResponse: (request, response) ->
     header = [
