@@ -52,6 +52,33 @@ m2node.run(app, {
 });
 ```
 
+example - JSON
+-----------------
+
+Here's an example of handling a JSON message from mongrel2.
+
+```javascript
+var express = require('express'),
+    m2node = require('m2node');
+
+var app = express.createServer();
+
+app.get('/', function (req, res) {
+  res.send('Hello World')
+});
+
+json_handler = function(req, res) {
+  return res.end({
+    message: "hi"
+  });
+};
+m2node.run(app, {
+  json_handler: 
+  send_spec: 'tcp://127.0.0.1:9996'
+  recv_spec: 'tcp://127.0.0.1:9997'
+});
+```
+
 contributors
 ------------
 
