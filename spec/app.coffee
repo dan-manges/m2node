@@ -30,10 +30,18 @@ server = http.createServer((req, res) ->
     res.end("Could not find page: #{req.url}")
 )
 
-m2node.run(
+json_handler = (req, res) ->
+  console.log 'json_handler'
+  console.log req.path
+  console.log JSON.stringify(req.body)
+  res.end({message: "hi"})
+
+handler = m2node.run(
   server,
+  json_handler: json_handler
   send_spec: 'tcp://127.0.0.1:9996'
   recv_spec: 'tcp://127.0.0.1:9997'
 )
+
 console.log('Ready...')
 

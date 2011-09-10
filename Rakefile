@@ -11,6 +11,9 @@ end
 desc "run the tests"
 task :test do
   sh("vows " + Dir.glob("spec/*_spec.js").join(" "))
+  Dir.chdir(SPEC_DIR) do
+    sh "./jsontest.py"
+  end
 end
 
 namespace :test do

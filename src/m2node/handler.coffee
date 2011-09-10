@@ -8,8 +8,11 @@ class Handler extends events.EventEmitter
     @pullSocket = zeromq.createSocket('pull')
     @pullSocket.connect(options.recv_spec)
     @pullSocket.on 'message', (message) =>
-      @emit 'request', new MongrelRequest(message)
-
+      req = new MongrelRequest(message)
+      if req.headers.METHOD == "JSON"
+        @emit 'json', req
+      else
+        @emit 'request', req
     @pubSocket = zeromq.createSocket('pub')
     @pubSocket.connect(options.send_spec)
 
