@@ -1,5 +1,6 @@
 {
   "name"                : "m2node",
+  "main"                : "./index",
   "version"             : "0.1.2",
   "description"         : "mongrel2 handler",
   "keywords"            : ["http", "mongrel2"],
