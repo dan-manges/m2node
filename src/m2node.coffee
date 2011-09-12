@@ -18,7 +18,8 @@ exports.run = (server, options) ->
       handler.sendResponse(request, jsonResponse.writeBuffer)
     if options.json_handler
       options.json_handler request, jsonResponse
-    else
-      jsonResponse.write({error:"Not Found"})
+    else if request.path != "@*"
+      # Only respond if this is not a system message
+      jsonResponse.end({error:"No json_handler for m2node"})
   handler
 

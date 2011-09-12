@@ -21,7 +21,7 @@ CONN.connect(("127.0.0.1", proxy_port))
 def send_request(data):
     request = '@jsontest %s\x00' % (json.dumps(data))
     CONN.send(request)
-
+    
 def read_reply():
     reply = ""
     ch = CONN.recv(1)
@@ -30,9 +30,13 @@ def read_reply():
         ch = CONN.recv(1)
     return json.loads(b64decode(reply))
 
-def assert_equal(a, e):
-    if a != e:
-        print "Error: received %s expected %s" % (a, e)
+def assert_kv_equal(h, k, v):
+    if k not in h:
+        print "Error: key '%s' is not in hash %s" % (k, h)
+        exit(1)
+        
+    if h[k] != v:
+        print "Error: received %s expected %s => %s" % (h, k, v)
         exit(1)
     
 def wait_for_user_return():
@@ -45,6 +49,6 @@ send_request(data)
 
 print "Waiting for reply"
 reply = read_reply()
-assert_equal(reply['message'], "hi")
+assert_kv_equal(reply, 'message', "hi")
 
 print "Success"
