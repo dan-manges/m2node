@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#
+# -*- coding: utf-8 -*-
 
 import sys
 import socket
@@ -18,8 +18,8 @@ CONN.connect(("127.0.0.1", proxy_port))
 #
 # Helper function to send/receive the messages (below)
 #
-def send_request(data):
-    request = '@jsontest %s\x00' % (json.dumps(data))
+def send_request():
+    request = '@jsontest {"a":"\xe3\x81\x8a"}\x00'
     CONN.send(request)
     
 def read_reply():
@@ -44,11 +44,10 @@ def wait_for_user_return():
     raw_input()
 
 print "Sending request"
-data = {'message': 'Hello World'}
-send_request(data)
+send_request()
 
 print "Waiting for reply"
 reply = read_reply()
-assert_kv_equal(reply, 'message', "hi")
+assert_kv_equal(reply, 'message', u'hi \u304a\u65e9\u3046')
 
 print "Success"

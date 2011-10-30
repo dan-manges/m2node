@@ -31,10 +31,12 @@ server = http.createServer((req, res) ->
 )
 
 json_handler = (req, res) ->
-  console.log 'json_handler'
   console.log req.path
-  console.log JSON.stringify(req.body)
-  res.end({message: "hi"})
+  payload = JSON.parse(req.body)
+  if payload.a == 'お'
+    res.end message: "hi お早う"
+  else
+    res.end message: "did not receive expected request"
 
 handler = m2node.run(
   server,
