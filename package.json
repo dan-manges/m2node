@@ -13,7 +13,7 @@
   "engines"             : { "node": "~0.4.8" },
   "bundledDependencies" : [ "" ],
   "dependencies" : {
-    "zeromq": "~0.5.1"
+    "zmq": "1.0.2"
   },
   "devDependencies" : {
     "coffee-script": "~1.1",

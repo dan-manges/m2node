@@ -10,6 +10,7 @@ exports.run = (server, options) ->
     fakeSocket = new FakeSocket()
     fakeSocket.on 'write', ->
       handler.sendResponse(request, fakeSocket.writeBuffer)
+      handler.emit 'response'
     server.emit 'connection', fakeSocket
     fakeSocket.emitData(request.toFullHttpRequest())
   handler.on 'json', (request) ->

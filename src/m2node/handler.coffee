@@ -1,5 +1,5 @@
 events = require 'events'
-zeromq = require 'zeromq'
+zeromq = require 'zmq'
 
 {MongrelRequest} = require './mongrel_request'
 
@@ -13,8 +13,12 @@ class Handler extends events.EventEmitter
         @emit 'json', req
       else
         @emit 'request', req
+    @pullSocket.on 'error', (e) =>
+      @emit 'error', e
     @pubSocket = zeromq.createSocket('pub')
     @pubSocket.connect(options.send_spec)
+    @pubSocket.on 'error', (e) =>
+      @emit 'error', e
 
   sendResponse: (request, response) ->
     header = [
