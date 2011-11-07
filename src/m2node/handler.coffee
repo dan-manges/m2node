@@ -1,5 +1,5 @@
 events = require 'events'
-zeromq = require 'zmq'
+zeromq = require 'zeromq'
 
 {MongrelRequest} = require './mongrel_request'
 
