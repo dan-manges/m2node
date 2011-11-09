@@ -2,7 +2,6 @@ var vows = require('vows');
 var assert = require('assert');
 var http = require('http');
 var m2node = require('../lib/m2node');
-var sys = require('sys');
 
 vows.describe('m2node').addBatch({
   'smoke test': {

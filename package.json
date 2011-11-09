@@ -1,5 +1,6 @@
 {
   "name"                : "m2node",
+  "main"                : "./index",
   "version"             : "0.1.2",
   "description"         : "mongrel2 handler",
   "keywords"            : ["http", "mongrel2"],
@@ -9,13 +10,12 @@
     [ "Paul Bergeron <paul.d.bergeron@gmail.com>" ],
   "main"                : "./lib/m2node.js",
   "repository"          : { "type": "git", "url" : "https://github.com/dan-manges/m2node.git" },
-  "engines"             : { "node": "~0.4.8" },
+  "engines"             : { "node": ">=0.6.0" },
   "bundledDependencies" : [ "" ],
   "dependencies" : {
-    "zeromq": "~0.5.1"
+    "zmq": "1.0.3"
   },
   "devDependencies" : {
-    "coffee-script": "~1.1",
-    "vows": "=0.5.8"
+    "vows": "=0.5.13"
   }
 }
