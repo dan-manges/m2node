@@ -1,6 +1,5 @@
 var vows = require('vows');
 var assert = require('assert');
-var sys = require('sys');
 var FakeSocket = require('../lib/m2node/fake_socket').FakeSocket;
 
 vows.describe('fake socket').addBatch({
