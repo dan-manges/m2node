@@ -9,10 +9,9 @@
     [ "Paul Bergeron <paul.d.bergeron@gmail.com>" ],
   "main"                : "./lib/m2node.js",
   "repository"          : { "type": "git", "url" : "https://github.com/dan-manges/m2node.git" },
-  "engines"             : { "node": "~0.4.8" },
   "bundledDependencies" : [ "" ],
   "dependencies" : {
-    "zeromq": "~0.5.1"
+    "zmq": "1.0.4"
   },
   "devDependencies" : {
     "coffee-script": "~1.1",
