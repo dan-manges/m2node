@@ -11,7 +11,7 @@
   "repository"          : { "type": "git", "url" : "https://github.com/dan-manges/m2node.git" },
   "bundledDependencies" : [ "" ],
   "dependencies" : {
-    "zmq": "git+ssh://git@github.com:dinedal/zeromq.node.git"
+    "zmq": "1.0.4"
   },
   "devDependencies" : {
     "coffee-script": "~1.1",
