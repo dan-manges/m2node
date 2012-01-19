@@ -1,7 +1,7 @@
 {FakeSocket} = require './m2node/fake_socket'
 {Handler} = require './m2node/handler'
 
-exports.version = '0.1.3'
+exports.version = '0.2.0'
 
 exports.run = (server, options) ->
   handler = new Handler(options)
