@@ -1,4 +1,3 @@
-sys = require 'sys'
 util = require 'util'
 events = require 'events'
 
