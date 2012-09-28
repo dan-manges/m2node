@@ -38,17 +38,19 @@ here's an example of serving an app built using the [express framework](http://e
 
 ```javascript
 var express = require('express'),
+    http = require('http'),
     m2node = require('m2node');
 
-var app = express.createServer();
+var app = express();
 
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
-m2node.run(app, {
-  send_spec: 'tcp://127.0.0.1:9996'
-  recv_spec: 'tcp://127.0.0.1:9997'
+m2node.run(
+  http.createServer(app), {
+    send_spec: 'tcp://127.0.0.1:9996'
+    recv_spec: 'tcp://127.0.0.1:9997'
 });
 ```
 
