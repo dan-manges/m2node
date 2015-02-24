@@ -6,11 +6,11 @@ zeromq = require 'zmq'
 class Handler extends events.EventEmitter
   constructor: (options) ->
     @pullSocket = zeromq.createSocket('pull')
-    @pullSocket.connect(options.recv_spec)
     @pullSocket.on 'message', (message) =>
       @emit 'request', new MongrelRequest(message)
 
     @pubSocket = zeromq.createSocket('pub')
+    @pullSocket.connect(options.recv_spec)
     @pubSocket.connect(options.send_spec)
 
   sendResponse: (request, response) ->
