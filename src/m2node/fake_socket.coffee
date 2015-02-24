@@ -5,6 +5,7 @@ class FakeSocket extends events.EventEmitter
   constructor: ->
     @writeBuffer = new Buffer('')
     @writable = true
+    @_writableState = {needDrain : false};
 
   destroy: -> # noop
   destroySoon: -> # noop
@@ -18,11 +19,7 @@ class FakeSocket extends events.EventEmitter
   setTimeout: (timeout, callback) -> # noop
 
   write: (data) ->
-    data = new Buffer data.toString()
-    combinedBuffer = new Buffer(@writeBuffer.length + data.length)
-    @writeBuffer.copy(combinedBuffer)
-    combinedBuffer.write(data.toString(), @writeBuffer.length)
-    @writeBuffer = combinedBuffer
+    @writeBuffer = new Buffer data
     @emit('write')
 
 exports.FakeSocket = FakeSocket
